@@ -13,7 +13,6 @@ const getButton = (buttonType) =>{
 export const Button = ({ children, buttonType, ...otherProps }) => {
 
     const CustomButton = getButton(buttonType);
-    console.log(CustomButton,"===========")
     return (<CustomButton {...otherProps}>{children}</CustomButton>);
 };
 
