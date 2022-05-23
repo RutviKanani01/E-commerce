@@ -1,4 +1,6 @@
 import {initializeApp} from 'firebase/app';
+import { store } from '../../store/store';
+import { useDispatch } from 'react-redux';
 import { 
     getAuth, 
     signInWithRedirect, 
@@ -19,6 +21,9 @@ import {
     query,
     getDocs
 } from 'firebase/firestore';
+import { setCurrentUser } from '../../store/user/user.action';
+
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyBmwcL8K9u8w64pRVWSZ-5tDzqZVMTxzLM",
@@ -95,7 +100,7 @@ const firebaseConfig = {
         }
     }
 
-    return userDocRef;
+    return userSnapshot;
   }
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
@@ -110,7 +115,23 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
     return await signInWithEmailAndPassword(auth, email, password);
 }
 
-export const signOutUser = async () => await signOut(auth);
+export const signOutUser = async () => {
+    await signOut(auth);
+    store.dispatch(setCurrentUser(null));
+}
 
 export const onAuthStateChangedListener = (callback) => 
     onAuthStateChanged(auth, callback)
+
+export const getCurrentUser = () => {
+    return new Promise((resolve, reject) => {
+        const unsubscribe = onAuthStateChanged(
+            auth,
+            (userAuth) => {
+                unsubscribe();
+                resolve(userAuth);
+            },
+            reject
+        );
+    });
+};
