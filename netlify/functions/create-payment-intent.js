@@ -1,4 +1,7 @@
-requestAnimationFrame('dotenv').config();
+// requestAnimationFrame('dotenv').config();
+
+require("dotenv").config();
+
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 exports.handler = async (event) => {
@@ -9,6 +12,7 @@ exports.handler = async (event) => {
             amount,
             currency: 'usd',
             payment_method_types: ['card'],
+            description: 'Software development services',
         });
 
         return {

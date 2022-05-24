@@ -11,9 +11,9 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
 import { store, persistor } from './store/store';
-// import { stripePromise } from './utils/stripe/stripe.utils';
+import { stripePromise } from './utils/stripe/stripe.utils';
 
-const stripePromise = loadStripe('pk_test_51L2bZNSHxMtuwC8olJboeiMfRmjpHdu6BlIB829g6OaEXfruhkGgjRX5JKhNtLAns5H9XU6ptZGz9FhhCzNNOg9L00f9cu23OD');
+console.log('////',stripePromise);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
