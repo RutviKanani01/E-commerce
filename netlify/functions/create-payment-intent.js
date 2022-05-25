@@ -1,6 +1,6 @@
-// requestAnimationFrame('dotenv').config();
+requestAnimationFrame('dotenv').config();
 
-require("dotenv").config();
+// require("dotenv").config();
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
